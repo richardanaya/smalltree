@@ -1,6 +1,6 @@
 [package]
 name = "smalltree"
-version = "0.0.0"
+version = "0.0.1"
 authors = ["Richard Anaya"]
 edition = "2018"
 description = "A small tree based on smallvec"
@@ -11,3 +11,4 @@ repository = "https://www.github.com/richardanaya/smallgraph"
 
 [dependencies]
 smallgraph = "0.0"
+smallvec = "1"
