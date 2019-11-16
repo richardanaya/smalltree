@@ -23,7 +23,7 @@ impl<T> SmallTree<T> {
         n
     }
 
-    pub fn children(&self, parent: NodeHandle) -> SmallVec<[NodeHandle;8]>{
+    pub fn children(&self, parent: NodeHandle) -> SmallVec<[NodeHandle; 8]> {
         self.graph.neighbors(parent)
     }
 
@@ -51,33 +51,33 @@ mod tests {
     // Note this useful idiom: importing names from outer (for mod tests) scope.
     use super::*;
 
-    #[derive(Debug,PartialEq)]
-    struct Foo{
-        v:u8
+    #[derive(Debug, PartialEq)]
+    struct Foo {
+        v: u8,
     }
 
     #[test]
     fn test_basic_0() {
-        let mut g = SmallTree::<Foo>::new(Foo{v:44});
-        let c1 = g.attach(g.root,Foo{v:55});
-        let c2 = g.attach(g.root,Foo{v:66});
-        assert_eq!(44,g.get(g.root).unwrap().v);
-        assert_eq!(55,g.get(c1).unwrap().v);
-        assert_eq!(66,g.get(c2).unwrap().v);
-        assert_eq!(2,g.children(g.root).len());
-        assert_eq!(55,g.get(g.children(g.root)[0]).unwrap().v);
-        assert_eq!(66,g.get(g.children(g.root)[1]).unwrap().v);
+        let mut g = SmallTree::<Foo>::new(Foo { v: 44 });
+        let c1 = g.attach(g.root, Foo { v: 55 });
+        let c2 = g.attach(g.root, Foo { v: 66 });
+        assert_eq!(44, g.get(g.root).unwrap().v);
+        assert_eq!(55, g.get(c1).unwrap().v);
+        assert_eq!(66, g.get(c2).unwrap().v);
+        assert_eq!(2, g.children(g.root).len());
+        assert_eq!(55, g.get(g.children(g.root)[0]).unwrap().v);
+        assert_eq!(66, g.get(g.children(g.root)[1]).unwrap().v);
         g.get_mut(c2).unwrap().v = 77;
-        assert_eq!(77,g.get(g.children(g.root)[1]).unwrap().v);
+        assert_eq!(77, g.get(g.children(g.root)[1]).unwrap().v);
     }
 
     #[test]
     fn test_basic_1() {
-        let mut g = SmallTree::<Foo>::new(Foo{v:44});
-        let c1 = g.attach(g.root,Foo{v:55});
-        g.attach(c1,Foo{v:66});
-        assert_eq!(3,g.graph.node_count());
+        let mut g = SmallTree::<Foo>::new(Foo { v: 44 });
+        let c1 = g.attach(g.root, Foo { v: 55 });
+        g.attach(c1, Foo { v: 66 });
+        assert_eq!(3, g.graph.node_count());
         g.remove(c1);
-        assert_eq!(1,g.graph.node_count());
+        assert_eq!(1, g.graph.node_count());
     }
 }
